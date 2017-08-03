@@ -1,0 +1,9 @@
+library("gap")
+GLM=read.delim("GCTA.PHEWAS.OUT.FINAL.txt.mapped",sep="\t",header=F)
+png("GCTA_PHEWAS_QQ.png",height=850,width=850)
+gcontrol2(GLM$V10,pch=20,col=("steelblue"),lcol="steelblue4",cex=1.5,cex.lab=1.5,cex.axis=1.5)
+dev.off()
+l=gcontrol2(GLM$V10)
+l1=as.data.frame(as.table(print(l$lambda)))
+l1$Var1="Overall_Additive"
+write.table(l1,"Lambda_GCTA.txt")

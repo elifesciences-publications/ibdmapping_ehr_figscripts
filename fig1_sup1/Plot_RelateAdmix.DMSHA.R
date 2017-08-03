@@ -1,0 +1,5 @@
+library("ggplot2")
+DMSHA_RelateAdmix <- read.delim("DMSHA_RelateAdmix.Filtered_Mapped", header=T)
+tiff("DMSHA_RelateAdmix2.tiff",height=600,width=600)
+ggplot(data=DMSHA_RelateAdmix) + geom_point(aes(x=k1,y=k2),size=3,shape=21,colour="grey20",fill="grey60") + ggtitle("HL") + scale_x_continuous(limits=c(0,1)) + scale_y_continuous(limits=c(0,1)) + theme_classic() + theme(legend.text = element_text(size=20),legend.title = element_text(size=20),  axis.text.x = element_text(size=20), axis.text.y = element_text(size=20),axis.title.x = element_text(size=20), title=element_text(size=22), axis.title.y = element_text(size=22),panel.border = element_rect(colour = "black",size=1,fill=NA),title =element_text(size=24, face='bold'))
+dev.off()

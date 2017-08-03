@@ -1,0 +1,7 @@
+library(ggplot2)
+library(RColorBrewer)
+PHEWAS_Basic_AgeSexPCAdj.CIincluded <- read.delim("PHEWAS_Basic_AgeSexPCAdj.CIincluded.Mapped", header=FALSE)
+spectpal = colorRampPalette(brewer.pal(11, "Spectral"))(16)
+tiff("PHEWAS_Spectral2.tiff",height=700,width=1000)
+ggplot(data=PHEWAS_Basic_AgeSexPCAdj.CIincluded) + geom_jitter(aes(x=V11,y=-log10(V14),fill=V11),shape=21,size=4.5) + theme_classic() + xlab("Disease Category") + ylab("-log10(P)") + theme(panel.border = element_rect(colour = "black",size=1,fill=NA),axis.text.x = element_text(angle = 45, hjust = 1)) + guides(col = guide_legend(ncol = 1)) + geom_hline(aes(yintercept=-log10(0.0005)),colour="firebrick",linetype=2)  + geom_text(data=subset(PHEWAS_Basic_AgeSexPCAdj.CIincluded, V14 < 0.0005),aes(x=V11,y=-log10(V14) + 0.11,label=V2),size=5) + theme(panel.grid.major = element_blank(),panel.border = element_rect(colour = "black",size=1,fill=NA), axis.text.x = element_text(size=14), axis.text.y = element_text(size=20),axis.title.x = element_text(size=20), axis.title.y = element_text(size=20)) + scale_fill_manual(values=spectpal,guide=FALSE) + scale_y_continuous(limits=c(0,7))  
+dev.off()
